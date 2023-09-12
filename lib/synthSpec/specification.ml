@@ -156,9 +156,9 @@ let rec verify (additional_constraints: SpecDiversity.verification_constraints) 
 					let param_ids =
 						List.map
 							(fun i -> string_of_expr (Param (i, Bool))) (* Bool is dummy (not used in string_of_expr) *)
-							(BatList.range 0 `To ((BatMap.cardinal m) - 1))
+							(BatList.range 0 `To ((BatSet.cardinal params) - 1))
 					in
-					List.map (fun x -> try BatMap.find x m with Not_found -> assert false) param_ids
+					List.map (fun x -> try BatMap.find x m with Not_found -> (snd (BatMap.any m))) param_ids
 				in
 				let sol_output_opt =
 					try
